@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Ujian Online</title>
+    <!-- Menggunakan CDN Tailwind CSS untuk kemudahan -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Admin Dashboard</h1>
+            <button id="logout-btn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
+                Logout
+            </button>
+        </header>
+
+        <main class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <!-- Kolom Kiri: Pengaturan & Upload -->
+            <div class="space-y-8">
+                <!-- Card Pengaturan Ujian -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold mb-4 border-b pb-2">Pengaturan Waktu Ujian</h2>
+                    <form id="settings-form" class="space-y-4">
+                        <div>
+                            <label for="waktu-mulai" class="block text-sm font-medium text-gray-700">Waktu Mulai</label>
+                            <input type="datetime-local" id="waktu-mulai" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                        </div>
+                        <div>
+                            <label for="waktu-selesai" class="block text-sm font-medium text-gray-700">Waktu Selesai</label>
+                            <input type="datetime-local" id="waktu-selesai" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                        </div>
+                        <p id="settings-status" class="text-sm text-green-600"></p>
+                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Simpan Pengaturan
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Card Upload Soal -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold mb-4 border-b pb-2">Upload Bank Soal (.docx)</h2>
+                    <form id="upload-form">
+                        <label for="docx-uploader" class="block text-sm font-medium text-gray-700 mb-2">Pilih file Microsoft Word (.docx) dengan format yang benar.</label>
+                        <input type="file" id="docx-uploader" accept=".docx" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                        <p id="upload-status" class="mt-4 text-sm"></p>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Kolom Kanan: Manajemen & Hasil -->
+            <div class="space-y-8">
+                <!-- Card Manajemen Peserta -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold mb-4 border-b pb-2">Manajemen Peserta</h2>
+                    <!-- Wrapper untuk membuat tabel bisa di-scroll di mobile -->
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pelanggaran</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="user-list-tbody" class="bg-white divide-y divide-gray-200">
+                                <!-- Data peserta akan diisi oleh JS. Ini contoh placeholder -->
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Memuat data...</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"></td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"></td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Card Hasil Ujian -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold mb-4 border-b pb-2">Hasil Ujian</h2>
+                     <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nilai</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="results-list-tbody" class="bg-white divide-y divide-gray-200">
+                               <!-- Data hasil ujian akan diisi oleh JS -->
+                               <tr><td class="px-6 py-4" colspan="3">Memuat data hasil ujian...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Load library & skrip utama -->
+    <script src="js/lib/mammoth.min.js"></script>
+    <script src="js/lib/dayjs.min.js"></script>
+    <script type="module" src="js/admin.js"></script>
+
+</body>
+</html>

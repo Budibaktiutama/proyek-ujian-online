@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Ujian Berlangsung</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Mencegah copy-paste dan seleksi teks */
+        body { -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+    </style>
+</head>
+<body class="bg-gray-200">
+
+    <!-- Tombol Mulai & Fullscreen -->
+    <div id="pre-exam-screen" class="flex flex-col items-center justify-center h-screen">
+        <h1 class="text-3xl font-bold mb-4">Selamat Datang di Ujian Online</h1>
+        <p class="mb-8">Ujian akan berjalan dalam mode layar penuh (fullscreen).</p>
+        <button id="start-exam-btn" class="px-8 py-4 text-white bg-green-600 rounded-lg text-xl font-bold">Mulai Ujian</button>
+    </div>
+
+    <!-- Tampilan Ujian Utama (Hidden by default) -->
+    <div id="exam-screen" class="hidden w-full h-screen p-4 md:p-8 flex flex-col">
+        <!-- Header: Timer & Info User -->
+        <div class="flex justify-between items-center mb-4 p-4 bg-white rounded-lg shadow">
+            <h2 id="user-name" class="text-lg font-semibold">Nama Peserta</h2>
+            <div id="timer" class="text-2xl font-bold text-red-600">--:--:--</div>
+        </div>
+
+        <!-- Konten Soal -->
+        <div id="question-container" class="flex-grow p-6 bg-white rounded-lg shadow">
+            <p class="mb-2 font-semibold">Soal #<span id="question-number">1</span></p>
+            <p id="question-text" class="text-lg mb-6">Memuat soal...</p>
+            <div id="options-container" class="space-y-4">
+                <!-- Pilihan ganda akan di-generate oleh JS -->
+            </div>
+        </div>
+
+        <!-- Navigasi -->
+        <div class="flex justify-between mt-6">
+            <button id="prev-btn" class="px-6 py-3 bg-gray-400 text-white rounded-lg">Sebelumnya</button>
+            <button id="next-btn" class="px-6 py-3 bg-blue-600 text-white rounded-lg">Selanjutnya</button>
+            <button id="submit-btn" class="px-6 py-3 bg-red-600 text-white rounded-lg hidden">Kumpulkan Jawaban</button>
+        </div>
+    </div>
+    
+    <!-- Overlay Peringatan Pelanggaran -->
+    <div id="warning-overlay" class="hidden fixed inset-0 bg-black bg-opacity-80 flex flex-col items-center justify-center text-white text-center z-50">
+        <h2 class="text-5xl font-bold mb-4">PERINGATAN!</h2>
+        <p class="text-2xl">Anda keluar dari mode layar penuh atau beralih aplikasi.</p>
+        <p class="text-xl mt-2">Segera kembali ke halaman ujian!</p>
+        <p class="text-lg mt-8">Jumlah Pelanggaran: <span id="violation-count">0</span>/3</p>
+        <p class="mt-4 text-yellow-400">Akun Anda akan terkunci setelah 3 kali pelanggaran.</p>
+    </div>
+
+    <script src="js/lib/screenfull.min.js"></script>
+    <script src="js/lib/dayjs.min.js"></script>
+    <script type="module" src="js/ujian.js"></script>
+</body>
+</html>
